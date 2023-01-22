@@ -3,7 +3,8 @@ import logging
 import traceback
 import discord
 
-from domain import CocMessageGenerator, CommandInterpreter
+from domain import CommandInterpreter
+from usecase import CocMessageGenerator
 from player import CocPlayer
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]

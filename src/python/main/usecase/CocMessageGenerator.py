@@ -1,4 +1,4 @@
-from . import CommandInterpreter
+from domain import CommandInterpreter
 from arg import DiceArg, PlayerArg, StaticArg
 from player import CocPlayer
 

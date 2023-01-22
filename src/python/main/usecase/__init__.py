@@ -1,0 +1,1 @@
+from .CocMessageGenerator import CocMessageGenerator
