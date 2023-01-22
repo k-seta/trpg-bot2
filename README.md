@@ -16,6 +16,7 @@ TRPG のオンラインセッションを行う際の補助として使うため
 
 - [Visual Studio Code](https://code.visualstudio.com/) (>= 1.74)
 - [asdf](https://asdf-vm.com/) (>= v0.11.1-27c8a10)
+- [poetry](https://python-poetry.org/) (>= 1.3.2)
 
 ### Preparation
 
