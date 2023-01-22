@@ -14,7 +14,7 @@ class Dice:
             self.amount = int(match.groups()[0])
             self.size = int(match.groups()[1])
         else:
-            raise Exception("Invalid Dice Parameters.")
+            raise Exception(f"Invalid Dice Parameters: {param}.")
 
     def __str__(self):
         return f"Dice: {vars(self)}"
