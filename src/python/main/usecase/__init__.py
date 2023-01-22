@@ -1,1 +1,1 @@
-from .CocMessageGenerator import CocMessageGenerator
+from .CocUsecase import CocUsecase

@@ -3,7 +3,7 @@ from .arg import DiceArg, PlayerArg, StaticArg
 from player import CocPlayer
 
 
-class CocMessageGenerator:
+class CocUsecase:
 
     interpreter = None
     player = None

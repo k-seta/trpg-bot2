@@ -4,7 +4,7 @@ import traceback
 import discord
 
 from domain import CommandInterpreter
-from usecase import CocMessageGenerator
+from usecase import CocUsecase
 from player import CocPlayer
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
@@ -41,7 +41,7 @@ async def on_message(message):
         if interpreter.is_dice():
             url = "https://charasheet.vampire-blood.net/4783848"
             player = CocPlayer(message.author.name, url=url)
-            generator = CocMessageGenerator(interpreter, player)
+            generator = CocUsecase(interpreter, player)
             await message.channel.send(
                 f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message()}"
             )
