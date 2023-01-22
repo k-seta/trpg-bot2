@@ -1,5 +1,6 @@
 import os
 import logging
+import traceback
 import discord
 
 from domain import CommandInterpreter, Dice
@@ -25,20 +26,24 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    interpreter = CommandInterpreter(message.content)
-    logger.debug(interpreter)
+    try:
+        interpreter = CommandInterpreter(message.content)
+        logger.debug(interpreter)
 
-    if interpreter.invalid():
-        return
+        if interpreter.invalid():
+            return
 
-    if interpreter.is_ping():
-        await message.channel.send("pong")
+        if interpreter.is_ping():
+            await message.channel.send("pong")
 
-    if interpreter.is_dice():
-        dice = Dice(interpreter.args[0])
-        await message.channel.send(
-            f"{message.author.mention} がサイコロを振ったよ\n=> {dice.roll()}"
-        )
+        if interpreter.is_dice():
+            dice = Dice(interpreter.args[0])
+            await message.channel.send(
+                f"{message.author.mention} がサイコロを振ったよ\n=> {dice.roll()}"
+            )
+    except Exception as e:
+        await message.channel.send(f"何かエラーが起きたみたいだよ\n```{str(e)}```")
+        traceback.print_exc()
 
 
 client.run(TOKEN, log_level=log_level)
