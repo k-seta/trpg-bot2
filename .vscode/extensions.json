@@ -4,6 +4,8 @@
     "oderwat.indent-rainbow",
     "ms-python.python",
     "davidanson.vscode-markdownlint",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "ms-azuretools.vscode-docker",
+    "hashicorp.terraform"
   ]
 }

@@ -4,6 +4,7 @@ mkdir -p /home
 cd /home
 
 git clone https://github.com/k-seta/trpg-bot2.git
+cd trpg-bot2
 
 export DISCORD_BOT_TOKEN=$(curl -H "Metadata-Flavor: Google" 'http://metadata.google.internal/computeMetadata/v1/instance/attributes/discord-bot-token')
 
