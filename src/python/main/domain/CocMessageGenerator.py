@@ -1,12 +1,15 @@
 from domain import CommandInterpreter, DiceArg, StaticArg
+from player import CocPlayer
 
 
 class CocMessageGenerator:
 
     interpreter = None
+    player = None
 
-    def __init__(self, interpreter: CommandInterpreter):
+    def __init__(self, interpreter: CommandInterpreter, player: CocPlayer):
         self.interpreter = interpreter
+        self.player = player
 
     def dice_message(self):
         clauses = []

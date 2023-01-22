@@ -4,6 +4,7 @@ import traceback
 import discord
 
 from domain import CocMessageGenerator, CommandInterpreter
+from player import CocPlayer
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
@@ -37,9 +38,11 @@ async def on_message(message):
             await message.channel.send("pong")
 
         if interpreter.is_dice():
-            generator = CocMessageGenerator(interpreter)
+            url = "https://charasheet.vampire-blood.net/4783848"
+            player = CocPlayer(message.author.name, url)
+            generator = CocMessageGenerator(interpreter, player)
             await message.channel.send(
-                f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message()}"
+                f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message(message.author)}"
             )
 
     except Exception as e:
