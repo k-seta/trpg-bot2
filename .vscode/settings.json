@@ -9,6 +9,7 @@
   "[python]": {
     "editor.tabSize": 4
   },
+  "python.defaultInterpreterPath": ".venv/bin/python",
   "python.languageServer": "Pylance",
   "editor.codeActionsOnSave": {
     "source.fixAll.markdownlint": true
