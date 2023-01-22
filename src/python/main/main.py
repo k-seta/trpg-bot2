@@ -2,6 +2,8 @@ import os
 import logging
 import discord
 
+from domain import CommandInterpreter
+
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
 logger = logging.getLogger("discord")
@@ -18,10 +20,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
     if message.author.bot:
         return
 
-    if message.content.startswith(".ping"):
+    interpreter = CommandInterpreter(message.content)
+    print(interpreter)
+    if interpreter.invalid():
+        return
+
+    if interpreter.is_ping():
         await message.channel.send("pong")
 
 
