@@ -2,7 +2,7 @@ import os
 import logging
 import discord
 
-from domain import CommandInterpreter
+from domain import CommandInterpreter, Dice
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
@@ -31,6 +31,12 @@ async def on_message(message):
 
     if interpreter.is_ping():
         await message.channel.send("pong")
+
+    if interpreter.is_dice():
+        dice = Dice(interpreter.args[0])
+        await message.channel.send(
+            f"{message.author.mention} がサイコロを振ったよ\n=> {dice.roll()}"
+        )
 
 
 client.run(TOKEN)
