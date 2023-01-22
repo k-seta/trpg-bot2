@@ -39,10 +39,10 @@ async def on_message(message):
 
         if interpreter.is_dice():
             url = "https://charasheet.vampire-blood.net/4783848"
-            player = CocPlayer(message.author.name, url)
+            player = CocPlayer(message.author.name, url=url)
             generator = CocMessageGenerator(interpreter, player)
             await message.channel.send(
-                f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message(message.author)}"
+                f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message()}"
             )
 
     except Exception as e:

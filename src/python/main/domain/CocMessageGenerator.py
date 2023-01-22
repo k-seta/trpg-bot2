@@ -1,4 +1,4 @@
-from domain import CommandInterpreter, DiceArg, StaticArg
+from . import CommandInterpreter, DiceArg, PlayerArg, StaticArg
 from player import CocPlayer
 
 
@@ -21,6 +21,15 @@ class CocMessageGenerator:
                 pass
             else:
                 clauses.append(dice_arg)
+                continue
+
+            # player_arg の作成を試みる
+            try:
+                player_arg = PlayerArg(arg, self.player)
+            except Exception as e:
+                pass
+            else:
+                clauses.append(player_arg)
                 continue
 
             # 全てに該当しなかった arg はそのまま返す
