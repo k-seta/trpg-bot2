@@ -41,6 +41,7 @@ async def on_message(message):
             await message.channel.send(
                 f"{message.author.mention} がサイコロを振ったよ\n=> {dice.roll()}"
             )
+
     except Exception as e:
         await message.channel.send(f"何かエラーが起きたみたいだよ\n```{str(e)}```")
         traceback.print_exc()
