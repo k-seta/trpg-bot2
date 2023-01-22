@@ -7,14 +7,12 @@ class Dice:
     amout = 0
     size = 0
 
-    def __init__(self, param: str):
-
-        match = re.search(r"^(\d+)d(\d+)$", param)
-        if match:
-            self.amount = int(match.groups()[0])
-            self.size = int(match.groups()[1])
+    def __init__(self, amount, size):
+        if amount > 0 and size > 0:
+            self.amount = amount
+            self.size = size
         else:
-            raise Exception(f"Invalid Dice Parameters: {param}.")
+            raise Exception(f"Invalid Dice Parameters: {arg}.")
 
     def __str__(self):
         return f"Dice: {vars(self)}"

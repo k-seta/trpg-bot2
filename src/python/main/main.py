@@ -3,7 +3,7 @@ import logging
 import traceback
 import discord
 
-from domain import CommandInterpreter, Dice
+from domain import CommandInterpreter, DiceArg
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
@@ -37,9 +37,9 @@ async def on_message(message):
             await message.channel.send("pong")
 
         if interpreter.is_dice():
-            dice = Dice(interpreter.args[0])
+            arg = DiceArg(interpreter.args[0])
             await message.channel.send(
-                f"{message.author.mention} がサイコロを振ったよ\n=> {dice.roll()}"
+                f"{message.author.mention} がサイコロを振ったよ\n=> {arg.value()}"
             )
 
     except Exception as e:
