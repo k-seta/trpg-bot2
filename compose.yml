@@ -1,0 +1,7 @@
+services:
+  trpg-bot:
+    image: local/trpg-bot:latest
+    build:
+      context: .
+    environment:
+      DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN}
