@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "trpg-bot2"
+version = "1.0.0"
+description = ""
+authors = ["k-seta <swordh16@gmail.com>"]
+readme = "README.md"
+packages = [{include = "trpg_bot2"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
