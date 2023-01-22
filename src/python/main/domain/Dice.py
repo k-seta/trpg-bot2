@@ -12,7 +12,7 @@ class Dice:
             self.amount = amount
             self.size = size
         else:
-            raise Exception(f"Invalid Dice Parameters: {arg}.")
+            raise Exception(f"Invalid Dice Parameters: {amount}, {size}.")
 
     def __str__(self):
         return f"Dice: {vars(self)}"
