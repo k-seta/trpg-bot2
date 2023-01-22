@@ -1,6 +1,6 @@
 import re
 
-from . import ABCArg, Dice
+from domain import ABCArg, Dice
 
 
 class DiceArg(ABCArg):

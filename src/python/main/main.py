@@ -3,7 +3,7 @@ import logging
 import traceback
 import discord
 
-from domain import CommandInterpreter, DiceArg
+from domain import CocMessageGenerator, CommandInterpreter
 
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
@@ -37,9 +37,9 @@ async def on_message(message):
             await message.channel.send("pong")
 
         if interpreter.is_dice():
-            arg = DiceArg(interpreter.args[0])
+            generator = CocMessageGenerator(interpreter)
             await message.channel.send(
-                f"{message.author.mention} がサイコロを振ったよ\n=> {arg.value()}"
+                f"{message.author.mention} がサイコロを振ったよ\n=> {generator.dice_message()}"
             )
 
     except Exception as e:
