@@ -1,5 +1,4 @@
 import re
-import textwrap
 
 
 class CommandInterpreter:
@@ -19,12 +18,7 @@ class CommandInterpreter:
             self.args = list(filter(None, groups[1].split(" ")))
 
     def __str__(self):
-        s = f"""
-            valid: {self.valid}
-            command: {self.command}
-            args: {self.args}
-        """
-        return textwrap.dedent(s)[1:-1]
+        return f"CommandInterpreter: {vars(self)}"
 
     def invalid(self):
         return not self.valid

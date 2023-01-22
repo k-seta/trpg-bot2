@@ -1,8 +1,5 @@
 import re
 import random
-import textwrap
-
-from . import CommandInterpreter
 
 
 class Dice:
@@ -20,10 +17,7 @@ class Dice:
             raise Exception("Invalid Dice Parameters.")
 
     def __str__(self):
-        s = f"""
-            dice: {self.amount}d{self.size}
-        """
-        return textwrap.dedent(s)[1:-1]
+        return f"Dice: {vars(self)}"
 
     def roll(self):
         return [random.randint(1, self.size) for i in range(self.amount)]

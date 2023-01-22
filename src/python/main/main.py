@@ -7,6 +7,7 @@ from domain import CommandInterpreter, Dice
 TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
 logger = logging.getLogger("discord")
+log_level = logging.getLevelName(os.environ.get("LOG_LEVEL", "INFO"))
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -25,7 +26,8 @@ async def on_message(message):
         return
 
     interpreter = CommandInterpreter(message.content)
-    print(interpreter)
+    logger.debug(interpreter)
+
     if interpreter.invalid():
         return
 
@@ -39,4 +41,4 @@ async def on_message(message):
         )
 
 
-client.run(TOKEN)
+client.run(TOKEN, log_level=log_level)
