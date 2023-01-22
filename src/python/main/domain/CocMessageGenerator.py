@@ -1,4 +1,5 @@
-from . import CommandInterpreter, DiceArg, PlayerArg, StaticArg
+from . import CommandInterpreter
+from arg import DiceArg, PlayerArg, StaticArg
 from player import CocPlayer
 
 
