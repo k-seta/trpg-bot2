@@ -19,15 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pCYSl5EDgo/cat@master
-        id: tf_version
-        with:
-          path: .terraform-version
+      - name: Get Terraform Version
+        working-directory: '.'
+        run: |
+          echo "TERRAFORM_VERSION=$(cat .tool-versions | grep terraform | awk '{print $2}')" >> $GITHUB_ENV
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: ${{ steps.tf_version.outputs.text }}
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Terraform Plan
         if: ${{ github.event.inputs.command == 'plan' }}
@@ -36,6 +36,7 @@ jobs:
           terraform init
           terraform validate
           terraform plan
+
       - name: Terraform Apply
         if: ${{ github.event.inputs.command == 'apply' }}
         working-directory: '.'
@@ -43,6 +44,7 @@ jobs:
           terraform init
           terraform validate
           terraform apply -auto-approve
+
       - name: Terraform Destroy
         if: ${{ github.event.inputs.command == 'destroy' }}
         working-directory: '.'
