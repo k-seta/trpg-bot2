@@ -3,7 +3,7 @@ import re
 
 class CommandInterpreter:
 
-    REGEX = r"^.(\w+)([\s|\S]*)$"
+    REGEX = r"^\.(\w+)([\s|\S]*)$"
 
     valid = False
     command = ""
@@ -12,10 +12,9 @@ class CommandInterpreter:
     def __init__(self, message):
         match = re.match(self.REGEX, message)
         if match:
-            groups = match.groups()
             self.valid = True
-            self.command = groups[0]
-            self.args = list(filter(None, groups[1].split(" ")))
+            self.command = match.groups()[0]
+            self.args = list(filter(None, match.groups()[1].split(" ")))
 
     def __str__(self):
         return f"CommandInterpreter: {vars(self)}"
