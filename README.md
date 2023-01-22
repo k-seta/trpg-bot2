@@ -23,3 +23,5 @@ TRPG のオンラインセッションを行う際の補助として使うため
 1. VS Code で [推奨拡張機能](/.vscode/extensions.json) をインストールします。`Ctrl/Cmd + Shift + X` で拡張機能パネルを開き、`@recommended` で推奨拡張機能の一覧を表示し、インストールを行ってください。
 
 2. `asdf install` で開発に必要なプログラミングのインストールを行ってください。
+
+3. `poetry install` で Python のライブラリのインストールを行ってください。
