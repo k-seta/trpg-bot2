@@ -1,18 +1,18 @@
 from domain import CommandInterpreter
 from .arg import DiceArg, PlayerArg, StaticArg
-from player import CocPlayer
+from repository import PlayerRepository
 
 
 class CocUsecase:
 
     interpreter = None
-    player = None
+    repository = None
 
-    def __init__(self, interpreter: CommandInterpreter, player: CocPlayer):
+    def __init__(self, interpreter: CommandInterpreter, repository: PlayerRepository):
         self.interpreter = interpreter
-        self.player = player
+        self.repository = repository
 
-    def dice_message(self):
+    def dice_message(self, guild, channel, username):
         clauses = []
         for arg in self.interpreter.args:
             # dice_arg の作成を試みる
@@ -26,7 +26,8 @@ class CocUsecase:
 
             # player_arg の作成を試みる
             try:
-                player_arg = PlayerArg(arg, self.player)
+                player = self.repository.get(guild, channel, username)
+                player_arg = PlayerArg(arg, player)
             except Exception as e:
                 pass
             else:
@@ -37,3 +38,8 @@ class CocUsecase:
             clauses.append(StaticArg(arg))
 
         return " ".join([clause.value() for clause in clauses])
+
+    def register_message(self, guild, channel, username):
+        url = self.interpreter.args[0]
+        self.repository.insert(guild, channel, username, url)
+        return url

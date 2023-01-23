@@ -5,6 +5,8 @@ from prettytable import PrettyTable
 
 class CocPlayer:
 
+    guild = "guild"
+    channel = "channel"
     user = "user"
     url = "url"
 
@@ -17,7 +19,9 @@ class CocPlayer:
     commu_arts = {}
     know_arts = {}
 
-    def __init__(self, user, url=None):
+    def __init__(self, guild, channel, user, url=None):
+        self.guild = guild
+        self.channel = channel
         self.user = user
         self.url = url
 
@@ -94,6 +98,9 @@ class CocPlayer:
         self.commu_arts = self.extract_table(soup, "Table_commu_arts", "TCAP[]")
         self.know_arts = self.extract_table(soup, "Table_know_arts", "TKAP[]")
 
+    def change_url(self, url):
+        self.__init__(self, self.guild, self.channel, self.user, url=url)
+
     def extract_table(self, soup, table_id, value_name):
         elements = soup.find("table", {"id": table_id}).find_all("th", {})[8:]
 
@@ -167,6 +174,7 @@ class CocPlayer:
             know_status += f"{key}: {value}\n"
 
         return (
+            f"{self.user} in {self.guild}#{self.channel}\n"
             f"{self.name}\n"
             f"{self.url}\n\n"
             "【能力値】\n"

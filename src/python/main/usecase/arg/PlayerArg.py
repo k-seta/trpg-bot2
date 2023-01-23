@@ -1,5 +1,5 @@
 from . import ABCArg
-from player import CocPlayer
+from repository import CocPlayer
 
 
 class PlayerArg(ABCArg):

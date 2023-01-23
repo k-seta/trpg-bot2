@@ -27,3 +27,6 @@ class CommandInterpreter:
 
     def is_dice(self):
         return self.command == "dice"
+
+    def is_register(self):
+        return self.command == "register"
