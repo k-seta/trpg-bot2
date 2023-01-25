@@ -44,20 +44,20 @@ async def on_message(message):
         if interpreter.is_ping():
             await message.channel.send("pong")
 
-        usecase = CocUsecase(interpreter, repository)
+        usecase = CocUsecase(guild, channel, username, interpreter, repository)
         if interpreter.is_dice():
             await message.channel.send(
-                f"{message.author.mention} がサイコロを振ったよ\n=> {usecase.dice_message(guild, channel, username)}"
+                f"{message.author.mention} がサイコロを振ったよ\n=> {usecase.dice_message()}"
             )
 
         if interpreter.is_register():
             await message.channel.send(
-                f"{message.author.mention} がキャラシートを登録したよ\n=> {usecase.register_message(guild, channel, username)}"
+                f"{message.author.mention} がキャラシートを登録したよ\n=> {usecase.register_message()}"
             )
 
         if interpreter.is_status():
             await message.channel.send(
-                f"{message.author.mention} のキャラシートだよ\n```{usecase.status_message(guild, channel, username)}```"
+                f"{message.author.mention} のキャラシートだよ\n```{usecase.status_message()}```"
             )
 
     except Exception as e:

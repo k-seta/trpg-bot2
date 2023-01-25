@@ -5,14 +5,27 @@ from repository import PlayerRepository
 
 class CocUsecase:
 
+    guild = None
+    channel = None
+    username = None
     interpreter = None
     repository = None
 
-    def __init__(self, interpreter: CommandInterpreter, repository: PlayerRepository):
+    def __init__(
+        self,
+        guild: str,
+        channel: str,
+        username: str,
+        interpreter: CommandInterpreter,
+        repository: PlayerRepository,
+    ):
+        self.guild = guild
+        self.channel = channel
+        self.username = username
         self.interpreter = interpreter
         self.repository = repository
 
-    def dice_message(self, guild, channel, username):
+    def dice_message(self):
         clauses = []
         for arg in self.interpreter.args:
             # dice_arg の作成を試みる
@@ -26,7 +39,7 @@ class CocUsecase:
 
             # player_arg の作成を試みる
             try:
-                player = self.repository.get(guild, channel, username)
+                player = self.repository.get(self.guild, self.channel, self.username)
                 player_arg = PlayerArg(arg, player)
             except Exception as e:
                 pass
@@ -39,11 +52,11 @@ class CocUsecase:
 
         return " ".join([clause.value() for clause in clauses])
 
-    def register_message(self, guild, channel, username):
+    def register_message(self):
         url = self.interpreter.args[0]
-        self.repository.insert(guild, channel, username, url)
+        self.repository.insert(self.guild, self.channel, self.username, url)
         return url
 
-    def status_message(self, guild, channel, username):
-        player = self.repository.get(guild, channel, username)
+    def status_message(self):
+        player = self.repository.get(self.guild, self.channel, self.username)
         return player.print()
