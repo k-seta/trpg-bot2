@@ -26,3 +26,6 @@ class DiceArg(ABCArg):
             return f"{dices[0]}"
         else:
             return f"{dices}"
+
+    def calc_value(self) -> str:
+        return self.value()

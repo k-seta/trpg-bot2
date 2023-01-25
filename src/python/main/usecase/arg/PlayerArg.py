@@ -17,3 +17,6 @@ class PlayerArg(ABCArg):
 
     def value(self) -> str:
         return f"{self.param_key} ({self.param_value})"
+
+    def calc_value(self) -> str:
+        return self.param_value

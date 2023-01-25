@@ -10,3 +10,6 @@ class StaticArg(ABCArg):
 
     def value(self) -> str:
         return self.arg
+
+    def calc_value(self) -> str:
+        return self.value()
