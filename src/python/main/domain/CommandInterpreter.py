@@ -37,5 +37,8 @@ class CommandInterpreter:
     def is_status(self):
         return self.command == "status"
 
+    def is_players(self):
+        return self.command == "players"
+
     def is_reset(self):
         return self.command == "reset"

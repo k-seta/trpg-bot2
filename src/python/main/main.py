@@ -93,6 +93,11 @@ async def on_message(message):
                 f"{message.author.mention} のキャラシートだよ\n```{usecase.status_message()}```"
             )
 
+        if interpreter.is_players():
+            await message.channel.send(
+                f"{guild} のキャラシート一覧だよ\n```{usecase.players_message()}```"
+            )
+
         # 管理者専用コマンド
         if message.author.guild_permissions.administrator:
             if interpreter.is_reset():

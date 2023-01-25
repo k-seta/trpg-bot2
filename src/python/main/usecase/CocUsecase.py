@@ -76,3 +76,13 @@ class CocUsecase:
             return player.print()
         else:
             return "キャラクターシートが登録されていません。\n'.register <url>' で登録してください。"
+
+    def players_message(self):
+        message = ""
+        for player in self.repository.db:
+            if player.guild == self.guild:
+                message += f"{player.user}#{player.channel}: {player.url}\n"
+        if len(message) > 0:
+            return message
+        else:
+            return "キャラクターシートの登録件数は0件です。"
