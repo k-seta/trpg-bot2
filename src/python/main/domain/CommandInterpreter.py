@@ -25,6 +25,9 @@ class CommandInterpreter:
     def is_ping(self):
         return self.command == "ping"
 
+    def is_help(self):
+        return self.command == "help"
+
     def is_dice(self):
         return self.command == "dice"
 
