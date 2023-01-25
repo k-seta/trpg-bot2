@@ -93,6 +93,12 @@ async def on_message(message):
                 f"{message.author.mention} のキャラシートだよ\n```{usecase.status_message()}```"
             )
 
+        # 管理者専用コマンド
+        if message.author.guild_permissions.administrator:
+            if interpreter.is_reset():
+                repository.delete_all()
+                await message.channel.send("管理者権限で DB がリセットされました")
+
     except Exception as e:
         await message.channel.send(f"何かエラーが起きたみたいだよ\n```{str(e)}```")
         traceback.print_exc()
