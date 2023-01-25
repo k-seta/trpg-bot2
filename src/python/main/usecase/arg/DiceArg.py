@@ -9,6 +9,7 @@ class DiceArg(ABCArg):
     REGEX = r"^(\d+)d(\d+)$"
 
     dice = None
+    result = None
 
     def __init__(self, arg: str):
 
@@ -21,11 +22,16 @@ class DiceArg(ABCArg):
             raise Exception(f"Invalid DiceArg: {arg}.")
 
     def value(self) -> str:
+        if self.result != None:
+            return self.result
+
         dices = self.dice.roll()
         if len(dices) == 1:
-            return f"{dices[0]}"
+            self.result = str(dices[0])
         else:
-            return f"{dices}"
+            self.result = str(dices)
+
+        return self.result
 
     def calc_value(self) -> str:
         return self.value()

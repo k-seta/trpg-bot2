@@ -50,7 +50,20 @@ class CocUsecase:
             # 全てに該当しなかった arg はそのまま返す
             clauses.append(StaticArg(arg))
 
-        return " ".join([clause.value() for clause in clauses])
+        base_message = " ".join([clause.value() for clause in clauses])
+        calc_clauses = [clause.calc_value() for clause in clauses]
+
+        if len(calc_clauses) > 1 and all(
+            [
+                (clause.isdecimal() or clause in ["+", "-", "*", ">", "<"])
+                for clause in calc_clauses
+            ]
+        ):
+            formula = " ".join([clause for clause in calc_clauses])
+            calc_result = eval(formula)
+            return f"{base_message}\n=> {calc_result}"
+        else:
+            return base_message
 
     def register_message(self):
         url = self.interpreter.args[0]
