@@ -43,3 +43,7 @@ class CocUsecase:
         url = self.interpreter.args[0]
         self.repository.insert(guild, channel, username, url)
         return url
+
+    def status_message(self, guild, channel, username):
+        player = self.repository.get(guild, channel, username)
+        return player.print()

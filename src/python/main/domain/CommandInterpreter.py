@@ -30,3 +30,6 @@ class CommandInterpreter:
 
     def is_register(self):
         return self.command == "register"
+
+    def is_status(self):
+        return self.command == "status"
