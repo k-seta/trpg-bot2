@@ -28,5 +28,8 @@ class PlayerRepository:
         else:
             return
 
+    def delete(self, guild, channel, username):
+        self.db = [player for player in self.db if player.guild != guild and player.channel != channel and player.user != username]
+
     def delete_all(self):
         self.db = []

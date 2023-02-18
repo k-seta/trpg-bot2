@@ -70,6 +70,12 @@ class CocUsecase:
         self.repository.insert(self.guild, self.channel, self.username, url)
         return url
 
+    def sync_message(self):
+        player = self.repository.get(self.guild, self.channel, self.username)
+        self.repository.delete(player.guild, player.channel, player.user)
+        self.repository.insert(player.guild, player.channel, player.user, player.url)
+        return player.url
+
     def status_message(self):
         player = self.repository.get(self.guild, self.channel, self.username)
         if player != None:

@@ -34,6 +34,9 @@ document = """
     キャラクターシートのデータはチャンネル毎に管理されます。
     e.g.) ".register https://charasheet.vampire-blood.net/3070216"
 
+    .sync
+    キャラクターシートのデータ URL 先のデータと同期します。
+
     .players
     その discord サーバーに登録されているキャラクターシートの一覧を表示します。
 
@@ -97,6 +100,11 @@ async def on_message(message):
         if interpreter.is_register():
             await message.channel.send(
                 f"{message.author.mention} がキャラシートを登録したよ\n=> {usecase.register_message()}"
+            )
+
+        if interpreter.is_sync():
+            await message.channel.send(
+                f"{message.author.mention} がキャラシートを更新したよ\n=> {usecase.sync_message()}"
             )
 
         if interpreter.is_status():
