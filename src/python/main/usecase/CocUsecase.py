@@ -39,6 +39,11 @@ class CocUsecase:
 
             # player_arg の作成を試みる
             try:
+                if arg in ["SAN"]:
+                    # 不便なので、SAN の場合のみ自動でキャラシートを更新する
+                    player = self.repository.get(self.guild, self.channel, self.username)
+                    self.repository.delete(player.guild, player.channel, player.user)
+                    self.repository.insert(player.guild, player.channel, player.user, player.url)
                 player = self.repository.get(self.guild, self.channel, self.username)
                 player_arg = PlayerArg(arg, player)
             except Exception as e:
