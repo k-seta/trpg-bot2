@@ -65,8 +65,13 @@ class CocUsecase:
             ]
         ):
             formula = " ".join([clause for clause in calc_clauses])
-            calc_result = eval(formula)
-            return f"{base_message}\n=> {calc_result}"
+            calc_result = str(eval(formula))
+            if calc_result == 'True':
+                return f"{base_message}\n=> 成功！！"
+            elif calc_result == 'False':
+                return f"{base_message}\n=> 失敗..."
+            else:
+                return f"{base_message}\n=> {calc_result}"
         else:
             return base_message
 
