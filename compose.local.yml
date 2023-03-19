@@ -1,0 +1,11 @@
+services:
+  firestore:
+    image: mtlynch/firestore-emulator
+    healthcheck:
+      test: ["CMD-SHELL", "curl localhost:8080"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    ports:
+      - 8080:8080
