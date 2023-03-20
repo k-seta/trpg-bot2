@@ -21,11 +21,11 @@ class PlayerRepository:
             cred = credentials.Certificate("firebase.local.json")
             if (not len(firebase_admin._apps)):
                 firebase_admin.initialize_app(cred)
-            logger.debug("Finished firebase_admin.initialize_app for Local env")
+            logger.info("Finished firebase_admin.initialize_app for Local env")
         else:
             # prd環境
             # TODO: credentialの読み込みとinitialize
-            logger.debug("Skip firebase_admin.initialize_app for Prod env")
+            logger.info("Skip firebase_admin.initialize_app for Prod env")
             return
 
     def get(self, guild, channel, username):
