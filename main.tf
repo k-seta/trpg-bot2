@@ -13,6 +13,7 @@ terraform {
 resource "google_compute_instance" "default" {
   name         = "trpg-bot2"
   machine_type = "e2-micro"
+  count        = 0
 
   boot_disk {
     initialize_params {
