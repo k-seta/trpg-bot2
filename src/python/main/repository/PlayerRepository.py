@@ -1,5 +1,11 @@
+import os
+import logging
+import firebase_admin
+from firebase_admin import credentials
+
 from . import CocPlayer
 
+logger = logging.getLogger("discord")
 
 class PlayerRepository:
 
@@ -7,6 +13,20 @@ class PlayerRepository:
 
     def __init__(self):
         self.db = []
+        self.__init_db_client()
+
+    def __init_db_client(self):
+        if os.environ.get("FIRESTORE_EMULATOR_HOST") != None:
+            # local環境
+            cred = credentials.Certificate("firebase.local.json")
+            if (not len(firebase_admin._apps)):
+                firebase_admin.initialize_app(cred)
+            logger.info("Finished firebase_admin.initialize_app for Local env")
+        else:
+            # prd環境
+            # TODO: credentialの読み込みとinitialize
+            logger.info("Skip firebase_admin.initialize_app for Prod env")
+            return
 
     def get(self, guild, channel, username):
         for player in self.db:
